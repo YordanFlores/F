@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control de Carro RC</title>
+    <script>
+        const esp32Url = 'http://ESP32_IP_ADDRESS'; // Reemplaza con la dirección IP del ESP32
+
+        function sendCommand(command) {
+            fetch(`${esp32Url}${command}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("status").innerText = data;
+                })
+                .catch(error => {
+                    document.getElementById("status").innerText = 'Error: ' + error;
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Control de Carro RC</h1>
+    <button onclick="sendCommand('/adelante')">Adelante</button>
+    <button onclick="sendCommand('/atras')">Atrás</button>
+    <p id="status">Car status: stopped</p>
+</body>
+</html>
